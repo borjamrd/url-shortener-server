@@ -49,14 +49,13 @@ async function getUser() {
     } else {
         console.log('User not found')
     }
-
     return result
     
 }
 
 
 
-module.exports = getUser
+module.exports = {getUser}
 
 
 

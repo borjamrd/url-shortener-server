@@ -1,10 +1,18 @@
-const express = require('express')
+const express = require('express'),
+      cors = require('cors'),
+      bodyParser = require('body-parser')
+
 const app = express()
 const port = 3002;
+
+
 app.use(cors());
+app.use(bodyParser.json());
+
+
 const logger = require('./middleware/logger404')
 
-app.use(express.json())
+
 
 app.use('/api', require('./routes'))
 

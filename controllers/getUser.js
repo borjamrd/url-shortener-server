@@ -1,13 +1,10 @@
 
-const getUserDB = require('../utils/conection');
+const getUserDB = require('../managers/getuser');
 
-function getUser(req, res){
-        try{
-            res.status(200).json(getUserDB);
-        }catch (error){
-            console.log(error)
-        }
-        
+async function getUser(req, res){
+    const result = await getUserDB()
+    await res.status(200).json(result);
+    console.log(result, "test getuser")
 }
 
 module.exports = getUser;

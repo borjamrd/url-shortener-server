@@ -36,26 +36,11 @@ async function listDatabases(client){
 /* async function AddNewUser(client, newUser){
     const result =  await client.db('user').collection('personaldata').insertMany(newUser)
 }  */
-async function getUser() {
-
-    const uri = 'mongodb+srv://borja:1234@cluster0.3lq29.mongodb.net/user?retryWrites=true&w=majority';
-    const client = new MongoClient(uri);
-    await client.connect()
-    const result = await client.db('user').collection('personaldata').findOne({name: "Federico"});
-
-    if (result){
-        console.log('Finded')
-        console.log(result)
-    } else {
-        console.log('User not found')
-    }
-    return result
-    
-}
 
 
 
-module.exports = {getUser}
+
+
 
 
 

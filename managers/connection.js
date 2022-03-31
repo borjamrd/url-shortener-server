@@ -1,12 +1,11 @@
 const {MongoClient} = require('mongodb');
  
-
 async function ConnectDatabase(){
-    const uri = 'mongodb+srv://borja:1234@cluster0.3lq29.mongodb.net/user?retryWrites=true&w=majority';
+    const uri = 'mongodb+srv://borja:1234@cluster0.3lq29.mongodb.net/users?retryWrites=true&w=majority';
     const client = new MongoClient(uri);
     try {
         await client.connect()
-        /* await listDatabases(client) */
+        await listDatabases(client)
         /* await AddNewUser(client, newUser) */
         await getUser(client)
     } catch (error) {
@@ -19,10 +18,12 @@ async function ConnectDatabase(){
 ConnectDatabase().catch(console.error)
 
 
+
+
 //------------Debería añadirlo en otro archivo/carpeta? -----//
 
-/* 
-async function listDatabases(client){
+
+/* async function listDatabases(client){
     const databasesList = await client.db("borja").admin().listDatabases();
     console.log('Databases:');
     databasesList.databases.forEach(db=> console.log(`-${db.name}`))

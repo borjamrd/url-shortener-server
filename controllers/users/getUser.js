@@ -1,5 +1,5 @@
 
-const getUserDB = require('../managers/getuser');
+const getUserDB = require('../../managers/userManager');
 
 async function getUser(req, res){
     const result = await getUserDB()

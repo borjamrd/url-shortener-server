@@ -1,6 +1,6 @@
 var router = require('express').Router();
 
-router.get('/', require('../controllers/getUser'));
-router.post('/', require('../controllers/postUser'));
+router.get('/', require('../controllers/users/getUser'));
+router.post('/', require('../controllers/users/postUser'));
 
 module.exports = router;

@@ -1,5 +1,5 @@
 
-const postUserDB = require('../managers/postuser')
+const postUserDB = require('../../managers/userManager')
 
 async function postUser(req, res){
     const result = await postUserDB()

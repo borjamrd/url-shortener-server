@@ -60,10 +60,6 @@ const getUrlById = asyncHandler(async(req,res)=>{
 const updateUrl = asyncHandler(async(req,res)=>{
     const {origUrl} = req.body;
     const url = await Url.findById(req.params.id)
-    if (url.user.toString() !== req.user.id.toString()){
-        res.status(401)
-        throw new Error('No puedes realizar esta acción')
-    }
     if (url){
         url.origUrl = origUrl;
         const updatedurl = await url.save()
@@ -77,10 +73,6 @@ const updateUrl = asyncHandler(async(req,res)=>{
 
 const deleteUrl = asyncHandler(async(req, res)=>{
     const url = await Url.findById(req.params.id)
-    if (url.user.toString() !== req.user.id.toString()){
-        res.status(401)
-        throw new Error('No puedes realizar esta acción')
-    }
     if (url){
         await url.remove()
         res.json({message: "Url eliminada"})

@@ -80,7 +80,53 @@ const deleteUrl = asyncHandler(async(req, res)=>{
         res.status(400)
         throw new Error ('Hay un error')
     }
-
-
 })
-module.exports = {createUrl, getUrls, getUrlById, updateUrl, deleteUrl}
+
+const redirectUrl = asyncHandler(async(req, res) =>{
+    try {
+        const urlId = req.params.urlId
+        const url = await Url.findOne({urlId});
+        console.log(url, 'url in redirect')
+        if (url) {
+          url.clicks++;
+          url.save();
+          return res.redirect(url.origUrl);
+        } else res.status(404).json('Not found');
+      } catch (err) {
+        console.log(err);
+        res.status(500).json('Server Error');
+      }
+    });
+
+    const createwauth = asyncHandler(async(req, res) =>{
+        const {origUrl} = req.body;
+        const base = process.env.BASE;
+        const urlId = shortid.generate();
+        let shortUrl = `${base}/${urlId}`;  
+
+        //usario provisional hasta crear opcion de invitado
+        let userprov = '62798a77be7ea8cdb4c98462'
+        const url = await Url.create({
+            user: userprov,
+            origUrl,
+            shortUrl,
+            urlId,
+            date: new Date(),
+        })
+    
+        console.log(url)
+        if (url){
+            res.status(201).json({
+                _id: url._id,
+                origUrl: url.origUrl,
+                shortUrl: url.shortUrl,
+                date: url.date,
+                user: url.user
+            })
+        } else{
+            res.status(400)
+            throw new Error ('Hay un error')
+        }
+    
+    })
+module.exports = {createUrl, getUrls, getUrlById, updateUrl, deleteUrl, redirectUrl, createwauth}

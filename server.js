@@ -5,13 +5,12 @@ const urlRoutes = require('./routes/urlRoutes')
 const connectDB = require('./config/db')
 const {notFound, errorHandler} = require('./middleware/errorMiddleware')
 
+
 dotenv.config()
 connectDB()
 const app = express()
 
 app.use(express.json())
-
-// app.get('/api/notes', noteRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/urls', urlRoutes )
 
